@@ -15,3 +15,8 @@ ___
    > select ★★★★ from table order by 제목
 * 봉준호 감독의 영화들을 검색 후 정렬
   > select 봉준호 from table order by 제목
+___
+### 기록
+> 1주차: mySQL 설치
+> 2주차: 주제 선정 및 README 파일 작성
+> 3주차: 데이터베이스 구상
