@@ -16,7 +16,7 @@ ___
 * 봉준호 감독의 영화들을 검색 후 정렬
   > select 봉준호 from table order by 제목
 * 영화번호 추가 후 기본키로 설정
- > ADD 영화번호 int PRIMARY KEY
+  > ADD 영화번호 int PRIMARY KEY
 ___
 ### 개체-관계 데이트그램(ER) 모델
 
