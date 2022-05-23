@@ -24,6 +24,12 @@ ___
 16. 음식은 음식 번호로 식별이 된다.
 17. 음식의 판매가는 원가에 할인율이 적용된 가격이다.
 ___
+>### 개체, 속성, 관계 분류
+>_개체_: 고객, 영화, 상영관, 후기, 매점  
+>_속성_: 고객 아이디, 고객명, 영화 번호, 영화 제목, 장르, 예약 번호, 예약 일자, 상영관 번호, 담당자, 후기 번호, 후기 제목, 후기 내용, 작성 일자, 음식번호, 음식이름, 원가, 할인율, 판매가  
+>_관계_: 예약, 상영, 작성
+
+___
 >### 개체-관계 데이트그램(ER) 모델
 
 ```mermaid
@@ -121,9 +127,65 @@ ___
 |음식번호|int|N|---|PK|---|---|
 |음식이름|varchar(10)|N|---|---|---|---|
 |원가|int|Y|---|---|---|---|
-|할인률|int|Y|---|---|---|---|
+|할인율|int|Y|---|---|---|---|
 |판매가|int|Y|---|---||---|
 
 ___
->### 데이터베이스 테이블 생성 스크립트
-
+>### 데이터베이스 테이블 생성 스크립트  
+  
+create table 영화(  
+   영화번호 int not null,  
+   영화제목 varchar(20) not null,  
+   장르 varchar(10),  
+   상영관번호 int not null,  
+   primary key(영화번호)  
+   );    
+   
+create table 상영관(  
+   상영관번호 int not null,  
+   영화번호 int not null,  
+   primary key(상영관번호)  
+   );  
+  
+create table 상영관-담당자(  
+   상영관번호 int not null,  
+   담당자 varchar(10),  
+   primary key(상영관번호, 담당자),  
+   foreign key(상영관번호) references 상영관(상영관번호)  
+   );  
+   
+create table 예약(  
+   예약번호 int not null,  
+   영화번호 int not null,  
+   상영관번호 int not null,  
+   예약일자 date,  
+   primary key(예약번호),  
+   foreign key(영화번호) references 영화(영화번호)  
+   foreign key(상영관번호) references 상영관(상영관번호)  
+   );  
+   
+create table 고객(    
+   고객아이디 varchar(10) not null,  
+   고객명 varchar(10) not null,  
+   primary key(고객아이디)  
+   );  
+   
+create table 후기(  
+   후기번호 int not null,  
+   후기제목 varchar(10) not null,  
+   후기내용 vharchar(100),  
+   작성일자 date,  
+   고객아이디 varchar(10) not null,  
+   primary key(후기번호)  
+   foreign key(고객아이디) references 고객(고객아이디)  
+   );  
+   
+create table 매점(  
+   음식번호 int not null,  
+   음식이름 varchar(10) not null,  
+   원가 int,  
+   할인율 int,  
+   판매가 int,  
+   primary key(음식번호)  
+   );  
+   
