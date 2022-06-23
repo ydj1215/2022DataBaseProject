@@ -50,18 +50,25 @@ A[artwork]
    A --> I((likeCount))
    A --> J((memberID))
    A --> K((memberID))
-   A --> |m|a
+   
 L[member]
   L --> M((id))
   L --> N((password))
   L --> O((nickname))
-  L --> O((email))
-  L --> O((name))
+  L --> P((email))
+  L --> Q((name))
+  L --> |1|z
+  L --> |n|a
+
+  
 a{likey}
   a --> b((memberID))
   a --> c((artworkID))
   a --> d((memberIP))
-  a --> |n|L
+  a --> |m|A
+  
+z{post}
+  z --> |n|A
 
 ```
 &nbsp;
