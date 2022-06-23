@@ -30,23 +30,23 @@ ___
 >### 요구사항 명세서  
 __1.__ FindMedia에 작품을 등록하려면 먼저 FindMedia의 member가 되어야 한다.  
 __2.__ member가 되기 위해서는 FindMedia에 회원가입을 해야 한다.  
-__3.__ 회원가입을 하기 위해서는 member의 id, password, nickname, email, name 정보를 입력해야 한다.
-__4.__ member들은 id로 식별이 된다.
+__3.__ 회원가입을 하기 위해서는 member의 id, password, nickname, email, name 정보를 입력해야 한다.  
+__4.__ member들은 id로 식별이 된다.  
 __5.__ 회원가입을 할 때, member의 email 정보는 빈칸이 입력이 되어도 상관 없다.  
-__6.__ FindMedia에 member가 artwork를 등록할 때, artwork에 대한 artworkID, memberID(artwork를 등록한 member의 ID), title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점)가 입력되어져야 한다.
-__7.__ artwork는 artworkID로 식별이 되는데, artworkID는 직접 입력하지 않아도 자동으로 1부터 시작해서 1씩 증가하면서 입력이 된다.
-__8.__ member가 artwork를 등록할 때, title(작품 제목)은 빈칸으로 두면 안되나, author(원작자), year(제작 연도), kind(분류), content(내용), score(평점) 들은 빈칸으로 설정해도 등록은 가능하다.
+__6.__ FindMedia에 member가 artwork를 등록할 때, artwork에 대한 artworkID, memberID(artwork를 등록한 member의 ID), title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점)가 입력되어져야 한다.  
+__7.__ artwork는 artworkID로 식별이 되는데, artworkID는 직접 입력하지 않아도 자동으로 1부터 시작해서 1씩 증가하면서 입력이 된다.  
+__8.__ member가 artwork를 등록할 때, title(작품 제목)은 빈칸으로 두면 안되나, author(원작자), year(제작 연도), kind(분류), content(내용), score(평점) 들은 빈칸으로 설정해도 등록은 가능하다.  
 __9.__ 한명의 member가 여러가지 artwork를 등록(post)이 가능하고, 하나의 artwork을 여러가지 member가 등록(post)이 가능하다.  
 __10.__ member은 여러가지 artwork에 추천(likey)를 누르는 것이 가능하다.  
 __11.__ artwork 입장에서는 여러 member이 추천(likey)을 누르는 것이 가능하다.  
 __12.__ member가 artwork에 추천(likey)을 누르면, artwork의 likeCount가 1 오르게 되고, likey에 대해서 추천을 누른 member의 memberID와 memberIP, 추천이 눌러진 artworkID 정보가 유지되어야 한다.   
-__13.__ likey는 어떤 사용자가 (memberID) 어떤 게시글을 (artworkID)를 눌렀는지에 따라서 식별이 된다.
+__13.__ likey는 어떤 사용자가 (memberID) 어떤 게시글을 (artworkID)를 눌렀는지에 따라서 식별이 된다.  
 &nbsp;
 ___
 >### 개체, 속성, 관계 분류
-__개체:__ member, artwork
-__속성:__ id, password, nickname, email, name, artworkID, memberID, title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점), likeCount, memberID, memberIP, artworkID
-__관계:__ post(등록), likey(추천)
+__개체:__ member, artwork  
+__속성:__ id, password, nickname, email, name, artworkID, memberID, title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점), likeCount, memberID, memberIP, artworkID  
+__관계:__ post(등록), likey(추천)  
 &nbsp;
 ___
 >### 개체-관계 데이트그램(ER) 모델
