@@ -27,30 +27,30 @@ FrontController에서 요청을 받으면 hash map을 이용하여 실체 처리
 요청된 작업이 이루어지면 자바스크립트를 사용해 알림창이 띄워지거나, 다른 페이지로 이동이 되게 설계를 해놓았다.  
 &nbsp;
 ___
->### 요구사항 명세서
-
+>### 요구사항 명세서  
+__1.__ FindMedia에 작품을 등록하려면 member가 되어야 한다.  
+__2.__ member가 되기 위해서는 FindMedia에 회원가입을 해야 한다.  
+__3.__ 회원가입을 하기 위해서는 member의 id, password, nickname, email, name 정보를 입력해야 한다.  
+__4.__ member들은 id로 식별이 된다.  
+__5.__ FindMedia에 등록되는 artwork 들은 artworkID, memberID, title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점), likeCount 정보가 입력되어져 있다.  
+__6.__ 각 artwork 들은 artworkID로 식별이 된다.  
+__7.__ 한명의 member가 여러가지 artwork를 등록(post)이 가능하고, 하나의 artwork을 여러가지 member가 등록(post)이 가능하다.  
+__8.__ member은 여러가지 artwork에 추천(likey)를 누르는 것이 가능하다.  
+__9.__ artwork 입장에서는 여러 member이 추천(likey)을 누르는 것이 가능하다.  
+__10.__ member가 artwork에 추천(likey)을 누르면, 추천을 누른 member의 memberID와 memberIP, 추천이 눌러진 artworkID 정보가 유지되어야 한다.   
 &nbsp;
 ___
 >### 개체, 속성, 관계 분류
-
+__개체:__ member, artwork
+__속성:__ id, password, nickname, email, name, artworkID, memberID, title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점), likeCount, memberID, memberIP, artworkID
+__관계:__ post(등록), likey(추천)
 &nbsp;
 ___
 >### 개체-관계 데이트그램(ER) 모델
 
 ```mermaid
 graph LR
-A[artwork]
-   A --> B((artworkID))
-   A --> C((memberID))
-   A --> D((title))
-   A --> E((author))
-   A --> F((year))
-   A --> G((kind))
-   A --> H((content))
-   A --> I((likeCount))
-   A --> J((memberID))
-   A --> K((memberID))
-   
+
 L[member]
   L --> M((id))
   L --> N((password))
@@ -60,6 +60,15 @@ L[member]
   L --> |1|z
   L --> |n|a
 
+A[artwork]
+   A --> B((artworkID))
+   A --> C((memberID))
+   A --> D((title))
+   A --> E((author))
+   A --> F((year))
+   A --> G((kind))
+   A --> H((content))
+   A --> I((likeCount))
   
 a{likey}
   a --> b((memberID))
@@ -74,16 +83,54 @@ z{post}
 &nbsp;
 ___
 >### 릴레이션 스키마
-
+member(__id__, password, nickname, email, name)  
 artwork(__artworkID__, memberID, title, author, year, kind, content, score, likeCount)  
 likey(__memberID__, artworkID, memberIP)  
-member(__id__, password, nickname, email, name)  
 &nbsp;
 ___
 >### 테이블 명세서
+__<member 테이블 명세서>__
+|Field|Type|Null|Key|Default|Extra|
+|---|---|---|---|---|---|
+|id|varchar(20)|NO|PRI|NULL| |
+|password|varchar(20)|NO||NULL| |
+|nickname|varchar(10)|NO||NULL| | 
+|email|varchar(40)|YES||NULL| | 
+|name|varchar(10)|NO||NULL| |
+
+&nbsp;
+&nbsp;
+
+__<artwork 테이블 명세서>__
+|Field|Type|Null|Key|Default|Extra|
+|---|---|---|---|---|---|
+|artworkID|int|NO|PRI|NULL|auto_increment|
+|memberID|varchar(20)|NO||NULL| |
+|title|varchar(20)|NO||NULL| | 
+|author|varchar(20)|YES||NULL| | 
+|year|int|YES||NULL| |
+|kind|varchar(20)|YES||NULL| |
+|content|varchar(4000)|YES||NULL| |
+|score|varchar(10)|YES||NULL| |
+|likeCount|int|YES||NULL| |
+
+&nbsp;
+&nbsp;
+
+__<likey 테이블 명세서>__
+|Field|Type|Null|Key|Default|Extra|
+|---|---|---|---|---|---|
+|memberID|varchar(20)|NO|PRI|NULL| |
+|artworkID|int|NO|PRI|NULL| |
+|memberIP|varchar(10)|YES||NULL| | 
+
+&nbsp;
 &nbsp;
 ___
 >### 데이터베이스 테이블 생성 스크립트  
 &nbsp;
 ___
 >### 정규화 과정  
+
+
+
