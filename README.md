@@ -5,12 +5,12 @@ ___
 >### 프로젝트 주제 설명
 &nbsp;FindMedia는 같은 작품을 원작으로 한 여러가지 미디어 믹스들을 한 눈에 볼 수 있고 그것들에 관한 평가를 서로서로 공유할수 있는 서비스를 제공하는 웹 사이트이다.  
 데이터베이스로서는 mysql을 사용하였고, 프론트 엔드는 자바 스크립트, css와 부트스트랩을 사용하여 디자인하였고, 백 엔드 같은 경우에는 mvc2방식으로 구현했다.
-mysql 에 findmedia라는 이름의 데이터베이스를 만들고, 그 안에 artwork, likey, member 라는 총 세가지의 테이블을 생성했습니다.   
-이름에서부터 알 수 있듯이, artwork는 등록작품들을 저장하는 데이터베이스이고, lieky는 사용자가 등록한 평가에 다른 사용자가 추천을 누르는 과정에서 어떤 사용자가 어떤 게시글에 추천을 눌렀는지를 저장하는 데이터베이스이다. member데이터베이스 역시 이름에서부터도 알수 있듯이 회원정보를 저장하는 데이터베이스입니다.  
+mysql 에 findmedia라는 이름의 데이터베이스를 만들고, 그 안에 artwork, likey, member 라는 총 세가지의 테이블을 생성했다.  
+이름에서부터 알 수 있듯이, artwork는 등록작품들을 저장하는 데이터베이스이고, lieky는 사용자가 등록한 평가에 다른 사용자가 추천을 누르는 과정에서 어떤 사용자가 어떤 게시글에 추천을 눌렀는지를 저장하는 데이터베이스이다. member 데이터베이스 역시 이름에서부터도 알수 있듯이 회원정보를 저장하는 데이터베이스이다.  
 첫 페이지인 index.jsp 에서 대부분의 기능이 이루어지게 설계하였다.  
 index.jsp에서 사용이 가능한 기능으로는 로그인, 회원가입, 회원탈퇴, 로그아웃, 작품 등록, 작품 검색, 작품 정렬, 등록 작품 추천 등이 있다.  
 작품 등록 같은 경우에는 5개 이상의 작품이 등록될때마다 페이지가 넘어간다.  
-검색바를 활용하여 작품을 최신순과 추천순 차순으로 정렬하는 기능 또한 추가하였습니다.  
+검색바를 활용하여 작품을 최신순과 추천순 차순으로 정렬하는 기능 또한 추가하였다.  
 분류를 활용하여, 같은 제목을 포함한 작품들을 조회하여 다른 방식으로 재해석된 같은 원작의 작품들을 만나볼 수 있다.  
 또한, 작품 추천 같은 경우는 한 사용자가 하나의 글에 한개의 추천만을 할 수 있도록 설계하였고, 작품 삭제 같은 경우에는 그 게시글을 등록한 사용자만이 그 글을 삭제할 수 있도록 설계하였다.
 login.jsp로 넘어갔을 때 사용 가능한 기능으로는 아이디와 비밀번호 찾기 기능이 있다.  
@@ -28,18 +28,19 @@ FrontController에서 요청을 받으면 hash map을 이용하여 실체 처리
 &nbsp;
 ___
 >### 요구사항 명세서  
-__1.__ FindMedia에 작품을 등록하려면 member가 되어야 한다.  
+__1.__ FindMedia에 작품을 등록하려면 먼저 FindMedia의 member가 되어야 한다.  
 __2.__ member가 되기 위해서는 FindMedia에 회원가입을 해야 한다.  
 __3.__ 회원가입을 하기 위해서는 member의 id, password, nickname, email, name 정보를 입력해야 한다.
 __4.__ member들은 id로 식별이 된다.
 __5.__ 회원가입을 할 때, member의 email 정보는 빈칸이 입력이 되어도 상관 없다.  
-__6.__ FindMedia에 member가 artwork를 등록할 때, artwork에 대한 artworkID, memberID(등록한 member의 ID), title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점)가 입력되어져야 한다.
+__6.__ FindMedia에 member가 artwork를 등록할 때, artwork에 대한 artworkID, memberID(artwork를 등록한 member의 ID), title(작품 제목), author(원작자), year(제작 연도), kind(분류), content(내용), score(평점)가 입력되어져야 한다.
 __7.__ artwork는 artworkID로 식별이 되는데, artworkID는 직접 입력하지 않아도 자동으로 1부터 시작해서 1씩 증가하면서 입력이 된다.
 __8.__ member가 artwork를 등록할 때, title(작품 제목)은 빈칸으로 두면 안되나, author(원작자), year(제작 연도), kind(분류), content(내용), score(평점) 들은 빈칸으로 설정해도 등록은 가능하다.
 __9.__ 한명의 member가 여러가지 artwork를 등록(post)이 가능하고, 하나의 artwork을 여러가지 member가 등록(post)이 가능하다.  
 __10.__ member은 여러가지 artwork에 추천(likey)를 누르는 것이 가능하다.  
-__11.__ artwork 입장에서는 여러 member이 추천(likey)을 누르는 것이 가능하다.
+__11.__ artwork 입장에서는 여러 member이 추천(likey)을 누르는 것이 가능하다.  
 __12.__ member가 artwork에 추천(likey)을 누르면, artwork의 likeCount가 1 오르게 되고, likey에 대해서 추천을 누른 member의 memberID와 memberIP, 추천이 눌러진 artworkID 정보가 유지되어야 한다.   
+__13.__ likey는 어떤 사용자가 (memberID) 어떤 게시글을 (artworkID)를 눌렀는지에 따라서 식별이 된다.
 &nbsp;
 ___
 >### 개체, 속성, 관계 분류
@@ -119,7 +120,8 @@ __<artwork 테이블 명세서>__
 &nbsp;
 &nbsp;
 
-__<likey 테이블 명세서>__
+__<likey 테이블 명세서>__  
+artwork와 member의 관계가 n:m이기 때문에, 그 관계는 릴레이션으로 변환이 된다.
 |Field|Type|Null|Key|Default|Extra|
 |---|---|---|---|---|---|
 |memberID|varchar(20)|NO|PRI|NULL| |
